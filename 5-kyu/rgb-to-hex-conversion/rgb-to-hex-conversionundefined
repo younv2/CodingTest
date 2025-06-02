@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+public class Kata
+{
+  public static string Rgb(int r, int g, int b)
+  {
+      string result = "";
+      result += DecToHex(r);
+      result += DecToHex(g);
+      result += DecToHex(b);
+​
+      return result;
+  }
+  public static string DecToHex(int value, int min = 0, int max = 255)
+  {
+      string result = "";
+      value = Math.Clamp(value, min, max);
+      Stack<int> stack = new Stack<int>();
+      for(int i =0; i < 2; i++)
+      {
+          stack.Push(value % 16);
+          value /= 16;
+      }
+​
+      for(int i = stack.Count;  i > 0; i--)
+      {
+          int temp = stack.Pop();
+          if(temp >= 10)
+          {
+              temp += 55;
+          }
+          else
+          {
+              temp += 48;
+          }
+          result += (char)temp;
+      }
+​
+      return result;
+  }
+}
